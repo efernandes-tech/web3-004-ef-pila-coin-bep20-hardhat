@@ -16,7 +16,7 @@ contract NewPilaCoin is ERC20 {
     }
 
     function mint() public {
-        require(_mintAmount > 0, 'Minting is not enabled');
+        require(_mintAmount > 0, 'Minting is not enabled.');
         require(
             block.timestamp > nextMint[msg.sender],
             'You cannot mint twice in a row.'
