@@ -1,24 +1,19 @@
 <h1 align="center">
-    <a href="#" alt="Project Name">Project Name</a>
+    <a href="#" alt="PilaCoin">PilaCoin BEP20 Token</a>
 </h1>
 
 <h3 align="center">
-    Brief description of your project
+    A BEP20 token implementation with minting functionality using Hardhat
 </h3>
 
 <p align="center">
-    <a href="https://github.com/efernandes-tech/scaffolds/commits/main">
-        <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/efernandes-tech/scaffolds" />
-    </a>
-    <img alt="Repository size" src="https://img.shields.io/github/repo-size/efernandes-tech/scaffolds">
     <a href="https://edersonfernandes.com.br">
         <img alt="made by @efernandes-tech" src="https://img.shields.io/badge/Made_by-@efernandes%E2%80%93tech-blue">
     </a>
-
 </p>
 
 <h4 align="center">
-    Status: In progress | Finished
+    Status: Finished
 </h4>
 
 <p align="center">
@@ -31,15 +26,18 @@
 
 ## About
 
-Description about your project and what it does.
+PilaCoin is a BEP20 token built on Binance Smart Chain using Hardhat and OpenZeppelin contracts. The project includes an ERC20-compliant token with controlled minting functionality, allowing the owner to configure mint amounts and delays between mints.
 
 ---
 
 ## Features
 
--   [x] Feature One
--   [x] Feature Two
--   [ ] Feature Three (in progress)
+-   [x] ERC20/BEP20 compliant token
+-   [x] Owner-controlled minting configuration
+-   [x] Time-delayed minting to prevent spam
+-   [x] Configurable mint amount and delay
+-   [x] Deployment to BSC Testnet
+-   [x] Comprehensive test suite
 
 ---
 
@@ -50,44 +48,64 @@ Description about your project and what it does.
 Before you begin, you will need to have the following tools installed:
 [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
 
+#### Environment Setup
+
+Create a `.env` file in the `web3/ef-pila-coin-bep20-hardhat` directory:
+
+```env
+SECRET=your_mnemonic_phrase
+BSC_URL=https://data-seed-prebsc-1-s1.binance.org:8545/
+INFURA_URL=your_infura_url
+API_KEY=your_bscscan_api_key
+```
+
 #### Running the project
 
 ```bash
 # Clone this repository
-git clone https://github.com/efernandes-tech/scaffolds.git
+git clone <repository-url>
 
 # Access the project folder
-cd scaffolds
+cd web3-004-ef-pila-coin-bep20-hardhat/web3/ef-pila-coin-bep20-hardhat
 
 # Install dependencies
 npm install
 
-# Run the application
+# Compile contracts
+npm run compile
+
+# Run tests
+npm test
+
+# Start local node
 npm start
 
-# The server will start at port: 3000 - go to http://localhost:3000
+# Deploy to BSC Testnet
+npm run deploy:script
 ```
 
 ---
 
 ## Tech Stack
 
-**Frontend:**
+**Smart Contracts:**
 
--   [React](https://reactjs.org/)
--   [TypeScript](https://www.typescriptlang.org/)
--   [Tailwind CSS](https://tailwindcss.com/)
+-   [Solidity](https://soliditylang.org/) ^0.8.20
+-   [OpenZeppelin Contracts](https://www.openzeppelin.com/contracts)
+-   [Hardhat](https://hardhat.org/)
+-   [Ethers.js](https://docs.ethers.org/)
 
-**Backend:**
+**Networks:**
 
--   [Node.js](https://nodejs.org/)
--   [Express](https://expressjs.com/)
--   [MongoDB](https://www.mongodb.com/)
+-   BSC Testnet (Binance Smart Chain)
+-   Sepolia Testnet (Ethereum)
+-   Local Hardhat Network
 
 **Tools:**
 
--   [Visual Studio Code](https://code.visualstudio.com/)
--   [Postman](https://www.postman.com/)
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [Hardhat Toolbox](https://hardhat.org/hardhat-runner/docs/guides/migrating-from-hardhat-waffle)
+-   [Mocha](https://mochajs.org/) (Testing)
 
 ---
 
