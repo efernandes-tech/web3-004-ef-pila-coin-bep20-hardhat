@@ -1,0 +1,23 @@
+{
+  "name": "ef-pila-coin-bep20-hardhat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx hardhat node",
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "deploy:dev": "npx hardhat ignition deploy ignition/modules/PilaCoin.ts --network local",
+    "deploy:prod": "npx hardhat ignition deploy ignition/modules/PilaCoin.ts --network sepolia"
+  },
+  "keywords": [],
+  "author": "efernandes.tech",
+  "license": "MIT",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0",
+    "hardhat": "^2.26.4"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0"
+  }
+}
