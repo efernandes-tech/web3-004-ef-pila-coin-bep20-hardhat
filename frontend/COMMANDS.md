@@ -22,7 +22,9 @@ npm run dev
 ```
 
 ```cmd
+cd ./frontend/pilacoin-faucet
 
+npm install web3
 ```
 
 ```cmd

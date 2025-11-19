@@ -13,12 +13,17 @@ import {
     Text,
     VStack,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const CoverPage = () => {
     const { colorMode } = useColorMode();
 
+    const [message, setMessage] = useState('');
+
     const onBtnClick = (): void => {
-        mint();
+        mint()
+            .then(tx => setMessage('Your tokens were sent. Tx: ' + tx))
+            .catch(err => setMessage(err.message));
     };
 
     return (
