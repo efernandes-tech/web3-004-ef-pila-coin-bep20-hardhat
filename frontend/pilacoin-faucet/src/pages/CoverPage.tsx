@@ -1,4 +1,5 @@
 import { ColorModeButton, useColorMode } from '@/components/ui/color-mode';
+import { mint } from '@/services/Web3Services';
 import {
     Box,
     Button,
@@ -15,6 +16,10 @@ import {
 
 const CoverPage = () => {
     const { colorMode } = useColorMode();
+
+    const onBtnClick = (): void => {
+        mint();
+    };
 
     return (
         <Box
@@ -124,6 +129,7 @@ const CoverPage = () => {
                             _active={{
                                 transform: 'translateY(0)',
                             }}
+                            onClick={onBtnClick}
                         >
                             <Image
                                 src="/assets/metamask.svg"
