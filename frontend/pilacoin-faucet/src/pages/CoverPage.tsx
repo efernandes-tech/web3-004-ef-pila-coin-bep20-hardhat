@@ -21,6 +21,7 @@ const CoverPage = () => {
     const [message, setMessage] = useState('');
 
     const onBtnClick = (): void => {
+        setMessage('Requesting your tokens...wait...');
         mint()
             .then(tx => setMessage('Your tokens were sent. Tx: ' + tx))
             .catch(err => setMessage(err.message));
@@ -143,6 +144,9 @@ const CoverPage = () => {
                             />
                             Connect MetaMask
                         </Button>
+                        <Text fontSize="xl" lineHeight="1.25" maxW="600px">
+                            {message}
+                        </Text>
                     </VStack>
 
                     {/* Footer */}
