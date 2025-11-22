@@ -1,0 +1,6 @@
+@PilaCoinFaucet.API_HostAddress = http://localhost:5000
+
+GET {{PilaCoinFaucet.API_HostAddress}}/api/Faucet/status
+Accept: application/json
+
+###
