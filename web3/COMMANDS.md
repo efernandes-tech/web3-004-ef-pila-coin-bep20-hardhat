@@ -40,7 +40,15 @@ npx hardhat verify --network bsctest 0x98E675928B647F7d3059a442526ad5FA07f5cA9C
 ```
 
 ```cmd
+cd ./web3/ef-pila-coin-bep20-hardhat
 
+npm start
+
+npm run compile
+npm run test
+
+npm run deploy:script:ef
+npx hardhat verify --network bsctest 0xa3F6856D3210D39Ed5C11184833C6cb1003D3659
 ```
 
 ```cmd

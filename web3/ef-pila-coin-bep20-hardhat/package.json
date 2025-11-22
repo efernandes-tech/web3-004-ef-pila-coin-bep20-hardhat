@@ -9,6 +9,7 @@
     "compile": "npx hardhat compile",
     "deploy:script": "npx hardhat run scripts/deploy.ts --network bsctest",
     "deploy:script:new": "npx hardhat run scripts/deployNew.ts --network bsctest",
+    "deploy:script:ef": "npx hardhat run scripts/deployEF.ts --network bsctest",
     "deploy:dev": "npx hardhat ignition deploy ignition/modules/PilaCoin.ts --network local",
     "deploy:prod": "npx hardhat ignition deploy ignition/modules/PilaCoin.ts --network sepolia"
   },
