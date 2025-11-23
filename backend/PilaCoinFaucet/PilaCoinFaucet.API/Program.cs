@@ -1,7 +1,16 @@
+using DotNetEnv;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.OpenApi;
+using PilaCoinFaucet.API.Providers;
+using PilaCoinFaucet.API.Services;
+
+// Load .env file at startup
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Access environment variables
+var contractAddress = Environment.GetEnvironmentVariable("CONTRACT_ADDRESS");
 
 // Configure logging
 builder.Logging.ClearProviders();
@@ -16,6 +25,10 @@ builder.Services.AddHttpLogging(options =>
                            HttpLoggingFields.ResponseStatusCode |
                            HttpLoggingFields.Duration;
 });
+
+// Register Web3 services
+builder.Services.AddSingleton<Web3Provider>();
+builder.Services.AddScoped<Web3Service>();
 
 // Add services
 builder.Services.AddControllers();

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PilaCoinFaucet.API.Services;
 
 namespace PilaCoinFaucet.API.Controllers;
 
@@ -7,10 +8,13 @@ namespace PilaCoinFaucet.API.Controllers;
 public class FaucetController : ControllerBase
 {
     private readonly ILogger<FaucetController> _logger;
+    private readonly Web3Service _web3Service;
 
-    public FaucetController(ILogger<FaucetController> logger)
+    public FaucetController(ILogger<FaucetController> logger,
+        Web3Service web3Service)
     {
         _logger = logger;
+        _web3Service = web3Service;
     }
 
     [HttpGet("status")]
@@ -27,13 +31,23 @@ public class FaucetController : ControllerBase
     [HttpPost("mint/{wallet}")]
     public ActionResult<object> Mint(string wallet)
     {
-        _logger.LogInformation("Mint request received for wallet: {Wallet}", wallet);
-
-        return Ok(new
+        try
         {
-            Success = true,
-            Message = "Coins minted successfully",
-            Timestamp = DateTime.UtcNow
-        });
+            _logger.LogInformation("Mint request received for wallet: {Wallet}", wallet);
+
+            var tx = _web3Service.MintAndTransfer(wallet);
+
+            return Ok(new
+            {
+                Success = tx,
+                Message = "Coins minted successfully",
+                Timestamp = DateTime.UtcNow
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error mint");
+            return StatusCode(500, "Error mint");
+        }
     }
 }

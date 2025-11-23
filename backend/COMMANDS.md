@@ -24,7 +24,10 @@ dotnet watch
 ```
 
 ```cmd
-
+cd ./backend/PilaCoinFaucet/PilaCoinFaucet.API
+dotnet add package DotNetEnv
+dotnet add package Nethereum.Web3
+dotnet add package Nethereum.Accounts
 ```
 
 ```cmd
