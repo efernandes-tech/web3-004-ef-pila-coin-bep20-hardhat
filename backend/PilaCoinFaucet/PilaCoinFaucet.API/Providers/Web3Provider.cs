@@ -1,4 +1,3 @@
-using System.Numerics;
 using Nethereum.ABI.FunctionEncoding;
 using Nethereum.Contracts;
 using Nethereum.Web3;
@@ -8,8 +7,6 @@ namespace PilaCoinFaucet.API.Providers;
 
 public class Web3Provider
 {
-    private static readonly BigInteger TransferAmount = 10000;
-
     private readonly IConfiguration _configuration;
     private readonly ILogger<Web3Provider> _logger;
 
@@ -33,7 +30,11 @@ public class Web3Provider
         {
             var mint = contract.GetFunction("mint");
             var mintGas = await mint.EstimateGasAsync(from, null, null, to);
-            await mint.SendTransactionAndWaitForReceiptAsync(from, mintGas, null, null, to);
+            var receipt = await mint.SendTransactionAndWaitForReceiptAsync(from, mintGas, null, null, to);
+
+            _logger.LogInformation("Minted to {To}, tx {Hash}", to, receipt.TransactionHash);
+
+            return receipt.TransactionHash;
         }
         catch (SmartContractRevertException ex)
         {
@@ -45,13 +46,5 @@ public class Web3Provider
             _logger.LogError("Mint reverted with custom error: {Data}", ex.ExceptionEncodedData);
             throw;
         }
-
-        var transfer = contract.GetFunction("transfer");
-        var transferGas = await transfer.EstimateGasAsync(from, null, null, to, TransferAmount);
-        var receipt = await transfer.SendTransactionAndWaitForReceiptAsync(from, transferGas, null, null, to, TransferAmount);
-
-        _logger.LogInformation("Transferred {Amount} to {To}, tx {Hash}", TransferAmount, to, receipt.TransactionHash);
-
-        return receipt.TransactionHash;
     }
 }
