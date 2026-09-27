@@ -23,7 +23,7 @@ const CoverPage = () => {
     const onBtnClick = (): void => {
         setMessage('Requesting your tokens...wait...');
         mint()
-            .then(tx => setMessage('Your tokens were sent. Tx: ' + tx))
+            .then(result => setMessage(result.message))
             .catch(err => setMessage(err.message));
     };
 
@@ -116,7 +116,7 @@ const CoverPage = () => {
                             Get your PilaCoins
                         </Heading>
                         <Text fontSize="xl" lineHeight="1.25" maxW="600px">
-                            Once a day, earn 1.000 coins for free just
+                            Once a day, earn 10.000 coins for free just
                             connecting your MetaMask below.
                         </Text>
                         <Button
@@ -142,7 +142,7 @@ const CoverPage = () => {
                                 alt="MetaMask logo"
                                 width={8}
                             />
-                            Connect MetaMask
+                            Get my tokens
                         </Button>
                         <Text fontSize="xl" lineHeight="1.25" maxW="600px">
                             {message}

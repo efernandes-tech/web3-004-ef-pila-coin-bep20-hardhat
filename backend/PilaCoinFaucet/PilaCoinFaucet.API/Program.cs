@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Access environment variables
 var contractAddress = Environment.GetEnvironmentVariable("CONTRACT_ADDRESS");
+var corsOrigin = Environment.GetEnvironmentVariable("CORS_ORIGIN") ?? "http://localhost:3000";
 
 // Configure logging
 builder.Logging.ClearProviders();
@@ -24,6 +25,18 @@ builder.Services.AddHttpLogging(options =>
                            HttpLoggingFields.RequestMethod |
                            HttpLoggingFields.ResponseStatusCode |
                            HttpLoggingFields.Duration;
+});
+
+// Register CORS policy for the frontend
+const string CorsPolicyName = "FrontendCors";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(CorsPolicyName, policy =>
+    {
+        policy.WithOrigins(corsOrigin)
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
 
 // Register Web3 services
@@ -65,6 +78,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(CorsPolicyName);
 app.UseAuthorization();
 app.MapControllers();
 
