@@ -1,0 +1,26 @@
+name: pilacoinfaucet
+
+services:
+  backend:
+    build:
+      context: ./backend/PilaCoinFaucet/PilaCoinFaucet.API
+    container_name: pilacoinfaucet-backend
+    env_file:
+      - ./backend/PilaCoinFaucet/PilaCoinFaucet.API/.env
+    environment:
+      CORS_ORIGIN: http://pilacoinfaucet.local:58080
+    ports:
+      - "58015:8080"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend/pilacoin-faucet
+      args:
+        VITE_API_URL: http://pilacoinfaucet.local:58015
+    container_name: pilacoinfaucet-frontend
+    ports:
+      - "58080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

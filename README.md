@@ -20,6 +20,7 @@
     <a href="#about">About</a> •
     <a href="#features">Features</a> •
     <a href="#how-it-works">How it works</a> •
+    <a href="#faucet-app">Faucet App</a> •
     <a href="#tech-stack">Tech Stack</a> •
     <a href="#author">Author</a>
 </p>
@@ -86,6 +87,44 @@ npm run deploy:script
 
 ---
 
+## Faucet App
+
+A faucet dApp lets users claim free PilaCoins: the backend (`backend/PilaCoinFaucet`, ASP.NET Core) mints and transfers tokens server-side, and the frontend (`frontend/pilacoin-faucet`, React + Vite + Chakra UI) provides the claim UI.
+
+### Running with Docker (recommended)
+
+Pre-requisite: [Docker](https://www.docker.com/) and Docker Compose.
+
+1. Add a `.local` host entry pointing to your machine:
+
+    ```
+    127.0.0.1 pilacoinfaucet.local
+    ```
+
+    - Linux/macOS: append the line above to `/etc/hosts`.
+    - Windows: append it to `C:\Windows\System32\drivers\etc\hosts` (as Administrator).
+
+2. Create the backend's `.env` file from `backend/PilaCoinFaucet/PilaCoinFaucet.API/.env.example` and fill in your `PRIVATE_KEY`, `WALLET`, `CONTRACT_ADDRESS` and `NODE_URL`.
+
+3. From the repository root, build and start both services:
+
+    ```bash
+    docker compose up --build -d
+    ```
+
+4. Open the app:
+    - Frontend: http://pilacoinfaucet.local:58080
+    - Backend API (Swagger): http://pilacoinfaucet.local:58015
+
+Both containers run under the `pilacoinfaucet` Compose project name, and use uncommon host ports (`58015`/`58080`) to avoid clashing with other local projects.
+
+### Running without Docker
+
+- **Backend**: `dotnet run` from `backend/PilaCoinFaucet/PilaCoinFaucet.API` (after creating its `.env` from `.env.example`).
+- **Frontend**: `npm install && npm run dev` from `frontend/pilacoin-faucet` (after creating its `.env` from `.env.example`).
+
+---
+
 ## Tech Stack
 
 **Smart Contracts:**
@@ -94,6 +133,17 @@ npm run deploy:script
 - [OpenZeppelin Contracts](https://www.openzeppelin.com/contracts)
 - [Hardhat](https://hardhat.org/)
 - [Ethers.js](https://docs.ethers.org/)
+
+**Backend (Faucet API):**
+
+- [ASP.NET Core](https://dotnet.microsoft.com/apps/aspnet) (.NET 10)
+- [Nethereum](https://nethereum.com/)
+
+**Frontend (Faucet App):**
+
+- [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/)
+- [Chakra UI](https://www.chakra-ui.com/)
 
 **Networks:**
 

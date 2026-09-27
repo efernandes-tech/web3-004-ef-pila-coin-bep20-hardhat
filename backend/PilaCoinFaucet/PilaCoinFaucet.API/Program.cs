@@ -4,8 +4,11 @@ using Microsoft.OpenApi;
 using PilaCoinFaucet.API.Providers;
 using PilaCoinFaucet.API.Services;
 
-// Load .env file at startup
-Env.Load();
+// Load .env file at startup, if present (in Docker, secrets are provided via environment variables instead)
+if (File.Exists(".env"))
+{
+    Env.Load();
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,7 +80,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
+// Skip HTTPS redirection inside containers, where only HTTP is exposed and no certificate is configured
+var runningInContainer = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true";
+if (!runningInContainer)
+{
+    app.UseHttpsRedirection();
+}
+
 app.UseCors(CorsPolicyName);
 app.UseAuthorization();
 app.MapControllers();
