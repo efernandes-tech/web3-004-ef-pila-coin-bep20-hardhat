@@ -32,12 +32,12 @@ PilaCoin is a BEP20 token built on Binance Smart Chain using Hardhat and OpenZep
 
 ## Features
 
--   [x] ERC20/BEP20 compliant token
--   [x] Owner-controlled minting configuration
--   [x] Time-delayed minting to prevent spam
--   [x] Configurable mint amount and delay
--   [x] Deployment to BSC Testnet
--   [x] Comprehensive test suite
+- [x] ERC20/BEP20 compliant token
+- [x] Owner-controlled minting configuration
+- [x] Time-delayed minting to prevent spam
+- [x] Configurable mint amount and delay
+- [x] Deployment to BSC Testnet
+- [x] Comprehensive test suite
 
 ---
 
@@ -90,22 +90,22 @@ npm run deploy:script
 
 **Smart Contracts:**
 
--   [Solidity](https://soliditylang.org/) ^0.8.20
--   [OpenZeppelin Contracts](https://www.openzeppelin.com/contracts)
--   [Hardhat](https://hardhat.org/)
--   [Ethers.js](https://docs.ethers.org/)
+- [Solidity](https://soliditylang.org/) ^0.8.20
+- [OpenZeppelin Contracts](https://www.openzeppelin.com/contracts)
+- [Hardhat](https://hardhat.org/)
+- [Ethers.js](https://docs.ethers.org/)
 
 **Networks:**
 
--   BSC Testnet (Binance Smart Chain)
--   Sepolia Testnet (Ethereum)
--   Local Hardhat Network
+- BSC Testnet (Binance Smart Chain)
+- Sepolia Testnet (Ethereum)
+- Local Hardhat Network
 
 **Tools:**
 
--   [TypeScript](https://www.typescriptlang.org/)
--   [Hardhat Toolbox](https://hardhat.org/hardhat-runner/docs/guides/migrating-from-hardhat-waffle)
--   [Mocha](https://mochajs.org/) (Testing)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Hardhat Toolbox](https://hardhat.org/hardhat-runner/docs/guides/migrating-from-hardhat-waffle)
+- [Mocha](https://mochajs.org/) (Testing)
 
 ---
 
