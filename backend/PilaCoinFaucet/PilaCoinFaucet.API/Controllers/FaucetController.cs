@@ -29,13 +29,13 @@ public class FaucetController : ControllerBase
     }
 
     [HttpPost("mint/{wallet}")]
-    public ActionResult<object> Mint(string wallet)
+    public async Task<ActionResult<object>> Mint(string wallet)
     {
         try
         {
             _logger.LogInformation("Mint request received for wallet: {Wallet}", wallet);
 
-            var tx = _web3Service.MintAndTransfer(wallet);
+            var tx = await _web3Service.MintAndTransfer(wallet);
 
             return Ok(new
             {

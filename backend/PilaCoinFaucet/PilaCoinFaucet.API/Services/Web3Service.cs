@@ -13,9 +13,9 @@ public class Web3Service
         _logger = logger;
     }
 
-    public bool MintAndTransfer(string to)
+    public async Task<bool> MintAndTransfer(string to)
     {
-        var result = _web3Provider.MintAndTransfer(to);
+        var result = await _web3Provider.MintAndTransfer(to);
 
         return !string.IsNullOrEmpty(result);
     }
