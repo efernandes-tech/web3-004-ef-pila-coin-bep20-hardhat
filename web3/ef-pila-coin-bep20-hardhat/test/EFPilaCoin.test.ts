@@ -262,6 +262,20 @@ describe('EFPilaCoin Tests', function () {
         );
     });
 
+    it('Should NOT mint (not owner)', async function () {
+        const { efPilaCoin, owner, otherAccount } = await loadFixture(
+            deployFixture,
+        );
+
+        await efPilaCoin.setMintAmount(1000n);
+
+        const instance = efPilaCoin.connect(otherAccount);
+
+        await expect(
+            instance.mint(otherAccount.address),
+        ).to.be.revertedWith('You do not have permission.');
+    });
+
     it('Should NOT mint', async function () {
         const { efPilaCoin, owner, otherAccount } = await loadFixture(
             deployFixture,
