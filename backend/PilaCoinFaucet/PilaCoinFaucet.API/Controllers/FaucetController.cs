@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Nethereum.ABI.FunctionEncoding;
+using Nethereum.Contracts;
 using PilaCoinFaucet.API.Services;
 
 namespace PilaCoinFaucet.API.Controllers;
@@ -44,10 +46,35 @@ public class FaucetController : ControllerBase
                 Timestamp = DateTime.UtcNow
             });
         }
+        catch (SmartContractRevertException ex)
+        {
+            _logger.LogWarning("Mint rejected by contract: {Reason}", ex.RevertMessage);
+            return BadRequest(new
+            {
+                Success = false,
+                Message = ex.RevertMessage,
+                Timestamp = DateTime.UtcNow
+            });
+        }
+        catch (SmartContractCustomErrorRevertException ex)
+        {
+            _logger.LogWarning("Mint rejected by contract with custom error: {Data}", ex.ExceptionEncodedData);
+            return BadRequest(new
+            {
+                Success = false,
+                Message = "Mint rejected by the contract",
+                Timestamp = DateTime.UtcNow
+            });
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error mint");
-            return StatusCode(500, "Error mint");
+            return StatusCode(500, new
+            {
+                Success = false,
+                Message = "Error mint",
+                Timestamp = DateTime.UtcNow
+            });
         }
     }
 }

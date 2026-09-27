@@ -12,7 +12,13 @@ export async function mint() {
 
     if (!accounts || !accounts.length) throw new Error(`No account allowed!`);
 
-    const response = await axios.post(`${API_URL}/api/Faucet/mint/${accounts[0]}`);
-
-    return response.data;
+    try {
+        const response = await axios.post(`${API_URL}/api/Faucet/mint/${accounts[0]}`);
+        return response.data;
+    } catch (err) {
+        if (axios.isAxiosError(err) && err.response?.data?.message) {
+            throw new Error(err.response.data.message);
+        }
+        throw err;
+    }
 }
