@@ -45,4 +45,6 @@ Task:
 
 When responding, show only the new/updated code (full file content for
 changed files), plus a short summary of what changed and why.
+
+<COMMIT_HASH>:
 ```
